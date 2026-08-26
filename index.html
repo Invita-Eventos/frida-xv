@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis XV Años | Frida Sophía</title>
+
+  <!-- Fuentes elegantes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Hoja de estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Reproductor de Audio de Fondo -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="audio/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Botón Flotante de Música -->
+  <button type="button" id="musicControl" class="music-toggle-btn" aria-label="Control de música" onclick="toggleMusic()">
+    <i data-lucide="disc" id="musicIcon" class="music-icon spin-disc"></i>
+  </button>
+
+  <!-- 1. PORTADA CINEMÁTICA -->
+  <section class="section-hero">
+    <div class="hero-frame"></div>
+    <div class="hero-content">
+      <span class="sub-greeting">Nuestra Celebración</span>
+      <h1 class="hero-name">Frida Sophía</h1>
+      <p class="hero-tagline">Mis XV Años</p>
+      <p class="hero-frase">"Hoy la niña que fui se despide con una sonrisa, para dar paso a la mujer que hoy comienzo a ser."</p>
+
+      <div class="hero-date-pill">
+        <span>SÁBADO</span>
+        <span class="dot">•</span>
+        <span>19 DE SEPTIEMBRE 2026</span>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <i data-lucide="chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- 2. MENSAJE DE BIENVENIDA -->
+  <section class="section-welcome">
+    <div class="container-narrow reveal">
+      <span class="eyebrow">Bienvenidos</span>
+      <div class="ornament-divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+      <p class="welcome-text">
+        Con el corazón lleno de alegría, nos preparamos para celebrar un día que hemos soñado por años.
+        Es un honor invitarte a ser parte de este capítulo tan especial, donde <strong>Frida Sophía</strong>
+        cumple sus XV años rodeada de quienes más la aman. Gracias por caminar junto a nosotros
+        y por ser parte de esta historia.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. CUENTA REGRESIVA -->
+  <section class="section-countdown">
+    <div class="container-narrow reveal">
+      <span class="eyebrow on-dark">Cada segundo cuenta</span>
+      <h2 class="title-display on-dark">Faltan sólo</h2>
+
+      <div class="timer-wrapper">
+        <div class="time-block">
+          <span class="time-number" id="days">00</span>
+          <span class="time-label">Días</span>
+        </div>
+        <div class="time-sep">:</div>
+        <div class="time-block">
+          <span class="time-number" id="hours">00</span>
+          <span class="time-label">Horas</span>
+        </div>
+        <div class="time-sep">:</div>
+        <div class="time-block">
+          <span class="time-number" id="minutes">00</span>
+          <span class="time-label">Min</span>
+        </div>
+        <div class="time-sep">:</div>
+        <div class="time-block">
+          <span class="time-number" id="seconds">00</span>
+          <span class="time-label">Seg</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. INVITACIÓN PERSONALIZADA / PASE -->
+  <section class="section-pass">
+    <div class="pass-ticket reveal">
+      <span class="pass-corner tl"></span>
+      <span class="pass-corner br"></span>
+      <p class="pass-lead">Invitación de Honor</p>
+      <h3 class="pass-guest-name" id="guestName">Apreciable Invitado</h3>
+      <div class="pass-divider-mini"></div>
+      <p class="pass-desc">Nos llena de alegría poder compartir este día tan especial con ustedes.</p>
+      <div class="pass-badge" id="passBadge">2 Pases Asignados</div>
+    </div>
+  </section>
+
+  <!-- 5. NUESTRA HISTORIA / GALERÍA EDITORIAL -->
+  <section class="section-story">
+    <div class="container-wide">
+      <div class="story-header reveal">
+        <span class="eyebrow">Recuerdos Inolvidables</span>
+        <h2 class="title-display">Cada Etapa, Un Tesoro</h2>
+      </div>
+
+      <div class="story-collage reveal">
+        <div class="story-frame main">
+          <img src="img/foto-museo-1.jpeg" alt="Apreciando el arte">
+          <div class="story-caption">Apreciando cada detalle</div>
+        </div>
+        <div class="story-frame secondary">
+          <img src="img/foto-gatitos.jpeg" alt="Momentos especiales">
+          <div class="story-caption">Momentos con amigos leales</div>
+        </div>
+        <div class="story-frame tertiary">
+          <img src="img/foto-museo-2.jpeg" alt="Mirando al futuro">
+          <div class="story-caption">Un nuevo comienzo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DETALLES DE LA CELEBRACIÓN — Save the Date -->
+  <section class="section-savedate">
+    <div class="container-narrow reveal">
+      <span class="eyebrow">Save the Date</span>
+      <div class="savedate-numeral">19</div>
+      <div class="savedate-month">Septiembre</div>
+      <div class="savedate-year"><em>2026</em></div>
+
+      <div class="savedate-grid">
+        <div class="savedate-item">
+          <i data-lucide="calendar-days"></i>
+          <span class="label">Día</span>
+          <span class="value">Sábado</span>
+        </div>
+        <div class="savedate-item">
+          <i data-lucide="clock"></i>
+          <span class="label">Hora</span>
+          <span class="value">7:30 PM</span>
+        </div>
+        <div class="savedate-item">
+          <i data-lucide="map-pin"></i>
+          <span class="label">Lugar</span>
+          <span class="value">Salón La Pica</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ITINERARIO -->
+  <section class="section-itinerary">
+    <div class="container-narrow">
+      <div class="story-header reveal">
+        <span class="eyebrow">El Programa</span>
+        <h2 class="title-display">Itinerario del Día</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i data-lucide="glass-water"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time">7:30 PM</span>
+            <h4 class="timeline-title">Recepción de Invitados</h4>
+            <p class="timeline-text">Bienvenida en Salón La Pica y cóctel de bienvenida.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i data-lucide="utensils"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time">8:30 PM</span>
+            <h4 class="timeline-title">Cena & Brindis</h4>
+            <p class="timeline-text">Banquete formal y palabras dedicadas a la quinceañera.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i data-lucide="music"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time">9:30 PM</span>
+            <h4 class="timeline-title">El Vals Principal</h4>
+            <p class="timeline-text">Momento especial junto a sus padres y familiares.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i data-lucide="party-popper"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time">10:00 PM - 02:00 AM</span>
+            <h4 class="timeline-title">Apertura de Pista</h4>
+            <p class="timeline-text">¡Música en vivo, DJ y mucha fiesta para celebrar!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. UBICACIÓN -->
+  <section class="section-events">
+    <div class="container-narrow">
+      <div class="story-header reveal">
+        <span class="eyebrow">¿Dónde Llegar?</span>
+        <h2 class="title-display">Ubicación</h2>
+      </div>
+
+      <div class="event-card-rich highlight reveal">
+        <div class="event-image-container">
+          <img src="img/La-Pica.jpeg" alt="Salón La Pica" class="event-venue-img">
+          <div class="event-image-badge">
+            <i data-lucide="sparkles"></i> Recepción
+          </div>
+        </div>
+
+        <div class="event-body">
+          <span class="event-time">7:30 PM</span>
+          <h3 class="event-heading">Salón La Pica</h3>
+          <p class="event-address">Te esperamos para celebrar una velada inolvidable.</p>
+          <a href="https://maps.app.goo.gl/2Xojviskzc4fE6Av7" target="_blank" class="event-btn">
+            <i data-lucide="map-pin"></i> Abrir en Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CÓDIGO DE VESTIMENTA -->
+  <section class="section-dresscode">
+    <div class="container-narrow reveal">
+      <i data-lucide="shirt" class="dresscode-icon"></i>
+      <span class="eyebrow">Código de Vestimenta</span>
+      <div class="ornament-divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+      <!-- PERSONALIZA: reemplaza el texto de abajo con el código de vestimenta específico, por ejemplo "Formal / Etiqueta" -->
+      <div class="dresscode-value">[Agrega aquí el código de vestimenta]</div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    10. DETALLES ESPECIALES (plantilla opcional)
+    ============================================================
+    Esta sección viene comentada porque no se proporcionaron los
+    datos (mesa de regalos, padrinos, frase especial, hashtag,
+    información adicional). Para activarla:
+      1. Descomenta el bloque de abajo.
+      2. Reemplaza los textos entre [corchetes] con la información real.
+      3. Elimina las tarjetas que no apliquen.
+
+    <section class="section-extras">
+      <div class="container-wide">
+        <div class="story-header reveal">
+          <span class="eyebrow">Detalles Especiales</span>
+          <h2 class="title-display">Un Poco Más</h2>
+        </div>
+        <div class="extras-grid reveal">
+          <div class="extras-card">
+            <i data-lucide="gift"></i>
+            <h4>Mesa de Regalos</h4>
+            <p>[Agrega aquí la información de la mesa de regalos]</p>
+          </div>
+          <div class="extras-card">
+            <i data-lucide="users"></i>
+            <h4>Padrinos</h4>
+            <p>[Agrega aquí los nombres de padres y padrinos]</p>
+          </div>
+          <div class="extras-card">
+            <i data-lucide="hash"></i>
+            <h4>Hashtag</h4>
+            <p>[#AgregaAquíElHashtag]</p>
+          </div>
+          <div class="extras-card">
+            <i data-lucide="info"></i>
+            <h4>Información Adicional</h4>
+            <p>[Agrega aquí cualquier información extra]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  -->
+
+  <!-- 11. CONFIRMACIÓN RSVP -->
+  <section class="section-rsvp">
+    <div class="container-narrow rsvp-relative">
+
+      <div class="rsvp-header reveal">
+        <span class="rsvp-tag">RSVP</span>
+        <h2 class="rsvp-title">¿Me acompañas<br><span class="rsvp-title-script">a celebrar?</span></h2>
+        <div class="rsvp-divider"></div>
+        <p class="rsvp-subtitle">
+          Tu asistencia es muy importante para nosotros.<br>
+          Al abrir WhatsApp, toca <strong>Enviar</strong> para completar tu confirmación.
+        </p>
+      </div>
+
+      <!-- Formulario -->
+      <form id="rsvpForm" class="rsvp-form-card reveal" onsubmit="event.preventDefault(); enviarWhatsApp();">
+
+        <div class="form-group">
+          <label for="guestInput" class="form-label">NOMBRE COMPLETO</label>
+          <input
+            type="text"
+            id="guestInput"
+            class="form-input"
+            placeholder="Escribe tu nombre"
+            required
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="messageInput" class="form-label">MENSAJE (OPCIONAL)</label>
+          <input
+            type="text"
+            id="messageInput"
+            class="form-input"
+            placeholder="Escribe un mensaje para mí"
+            maxlength="100"
+            autocomplete="off"
+          >
+          <div class="char-counter"><span id="charCount">0</span> / 100 caracteres</div>
+        </div>
+
+        <button type="button" id="btnSubmitRsvp" class="btn-rsvp-submit" onclick="enviarWhatsApp()">
+          <i data-lucide="heart" class="icon-heart"></i>
+          <span>CONFIRMAR POR WHATSAPP</span>
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- 12. CIERRE -->
+  <section class="section-closing">
+    <div class="closing-content reveal">
+      <span class="closing-script">Gracias</span>
+      <h2 class="closing-name">Frida Sophía</h2>
+      <p class="closing-text">
+        Gracias por ser parte de este momento tan especial y por acompañarnos a celebrar
+        un sueño hecho realidad. Cada uno de ustedes forma parte de esta historia.
+      </p>
+      <p class="closing-date">19 de Septiembre, 2026</p>
+    </div>
+  </section>
+
+  <!-- Modal Emergente de Confirmación -->
+  <div id="confirmationModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-icon">
+        <i data-lucide="check-circle-2"></i>
+      </div>
+      <h3 class="modal-title">¡Gracias por confirmar!</h3>
+      <p class="modal-text" id="modalMessage">
+        Hemos preparado tu mensaje para WhatsApp. Toca "Enviar" en tu aplicación para finalizar.
+      </p>
+      <button type="button" class="btn-modal-close" onclick="cerrarModal()">Entendido</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>Frida Sophía • Mis XV Años</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
+</body>
+</html>
