@@ -1,4 +1,4 @@
-// 1. Inicializar iconos
+// 1. Inicializar iconos de Lucide
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     lucide.createIcons();
@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 2. Temporizador regresivo exacto (19 de Septiembre de 2026, 19:30:00 hrs)
-// Mes en JS es base 0: (8 = Septiembre)
-const targetDate = new Date(2026, 8, 19, 19, 30, 0).getTime();
+// En JavaScript los meses son base 0: 8 = Septiembre
+const targetDate = new Date(2026, 8, 19, 16, 0, 0).getTime();
 
 function updateTimer() {
   const now = new Date().getTime();
@@ -36,11 +36,10 @@ function updateTimer() {
   }
 }
 
-// Ejecutar inmediatamente y luego por intervalo cada segundo
 updateTimer();
 setInterval(updateTimer, 1000);
 
-// 3. Parámetros dinámicos desde URL (?invitado=Familia+Perez&pases=3)
+// 3. Parámetros dinámicos desde la URL (?invitado=Familia+Perez&pases=3)
 const params = new URLSearchParams(window.location.search);
 const guest = params.get('invitado') || '';
 const passes = params.get('pases') || '2';
@@ -118,10 +117,29 @@ function cerrarModal() {
   }
 }
 
-// 6. Control de Música de Fondo
+// 6. Control de Música de Fondo y Pantalla de Entrada (Splash)
 const bgMusic = document.getElementById('bgMusic');
 const musicIcon = document.getElementById('musicIcon');
 let isMusicPlaying = false;
+
+function entrarInvitacion() {
+  const splash = document.getElementById('welcomeOverlay');
+  if (splash) {
+    splash.classList.add('hidden');
+  }
+
+  // Iniciar audio al pulsar el botón de abrir
+  if (bgMusic) {
+    bgMusic.play().then(() => {
+      isMusicPlaying = true;
+      if (musicIcon) {
+        musicIcon.classList.remove('music-paused');
+      }
+    }).catch(err => {
+      console.log("Reproducción manual requerida:", err);
+    });
+  }
+}
 
 function toggleMusic() {
   if (!bgMusic) return;
@@ -133,7 +151,7 @@ function toggleMusic() {
         musicIcon.classList.remove('music-paused');
       }
     }).catch(err => {
-      console.log("Autoplay bloqueado por el navegador:", err);
+      console.log("Autoplay bloqueado:", err);
     });
   } else {
     bgMusic.pause();
@@ -144,6 +162,7 @@ function toggleMusic() {
   }
 }
 
+// Respaldo: Iniciar música con el primer toque si no usaron el botón de entrada
 document.addEventListener('click', function initAudioOnFirstTouch() {
   if (bgMusic && !isMusicPlaying) {
     bgMusic.play().then(() => {
@@ -155,7 +174,8 @@ document.addEventListener('click', function initAudioOnFirstTouch() {
   }
   document.removeEventListener('click', initAudioOnFirstTouch);
 }, { once: true });
-// 7. Animaciones de entrada suaves al hacer scroll (aditivo, no afecta lo demás)
+
+// 7. Animaciones suaves al hacer scroll (Scroll Reveal)
 (function initScrollReveal() {
   const revealEls = document.querySelectorAll('.reveal');
   if (!revealEls.length) return;

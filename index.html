@@ -17,6 +17,86 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Sprite floral reutilizable (oculto) -->
+  <svg class="deco-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="deco-bloom" viewBox="0 0 100 100">
+        <g fill="currentColor">
+          <ellipse cx="50" cy="30" rx="13" ry="21"/>
+          <ellipse cx="50" cy="30" rx="13" ry="21" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="30" rx="13" ry="21" transform="rotate(144 50 50)"/>
+          <ellipse cx="50" cy="30" rx="13" ry="21" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="30" rx="13" ry="21" transform="rotate(288 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="8" fill="#FBF6F1"/>
+      </symbol>
+      <symbol id="deco-sprig" viewBox="0 0 120 100">
+        <path d="M10 90 C30 60 40 40 60 20" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55"/>
+        <use href="#deco-bloom" x="38" y="0" width="42" height="42"/>
+        <use href="#deco-bloom" x="0" y="55" width="26" height="26"/>
+      </symbol>
+      <symbol id="deco-cluster" viewBox="0 0 220 220">
+        <path d="M42 214 C60 166 72 134 92 104" fill="none" stroke="var(--sage)" stroke-width="2.5" opacity="0.55"/>
+        <path d="M172 214 C152 172 142 142 122 112" fill="none" stroke="var(--sage)" stroke-width="2.5" opacity="0.55"/>
+        <ellipse cx="55" cy="196" rx="10" ry="4" fill="var(--sage)" opacity="0.5" transform="rotate(-30 55 196)"/>
+        <ellipse cx="158" cy="188" rx="10" ry="4" fill="var(--sage)" opacity="0.5" transform="rotate(35 158 188)"/>
+        <g transform="translate(72,72)">
+          <g fill="var(--rose-deep)">
+            <ellipse cx="0" cy="-25" rx="16" ry="27"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(288)"/>
+          </g>
+          <circle r="9" fill="#FBF6F1"/>
+        </g>
+        <g transform="translate(142,44) scale(0.72)">
+          <g fill="var(--terracotta)">
+            <ellipse cx="0" cy="-25" rx="16" ry="27"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(288)"/>
+          </g>
+          <circle r="9" fill="#FBF6F1"/>
+        </g>
+        <g transform="translate(152,116) scale(0.5)">
+          <g fill="var(--nude-deep)">
+            <ellipse cx="0" cy="-25" rx="16" ry="27"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(288)"/>
+          </g>
+          <circle r="9" fill="#FBF6F1"/>
+        </g>
+        <g transform="translate(34,150) scale(0.46)">
+          <g fill="var(--rose-pale)">
+            <ellipse cx="0" cy="-25" rx="16" ry="27"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-25" rx="16" ry="27" transform="rotate(288)"/>
+          </g>
+          <circle r="9" fill="#FBF6F1"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Pantalla de Entrada para Autoplay de Música -->
+  <div id="welcomeOverlay" class="welcome-splash">
+    <div class="splash-card">
+      <span class="splash-tag">Nuestra Celebración</span>
+      <h2 class="splash-title">Frida Sophía</h2>
+      <p class="splash-subtitle">Mis XV Años</p>
+      <button type="button" class="btn-open-invite" onclick="entrarInvitacion()">
+        <i data-lucide="music" style="width: 18px; height: 18px;"></i>
+        <span>ABRIR INVITACIÓN</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Reproductor de Audio de Fondo -->
   <audio id="bgMusic" loop preload="auto">
     <source src="audio/musica.mp3" type="audio/mpeg">
@@ -34,7 +114,7 @@
       <span class="sub-greeting">Nuestra Celebración</span>
       <h1 class="hero-name">Frida Sophía</h1>
       <p class="hero-tagline">Mis XV Años</p>
-      <p class="hero-frase">"Hoy la niña que fui se despide con una sonrisa, para dar paso a la mujer que hoy comienzo a ser."</p>
+      <p class="hero-frase">"Volver a florecer nunca ha sido un problema"</p>
 
       <div class="hero-date-pill">
         <span>SÁBADO</span>
@@ -50,9 +130,12 @@
 
   <!-- 2. MENSAJE DE BIENVENIDA -->
   <section class="section-welcome">
+    <svg class="deco-flower deco-flower--float-left"><use href="#deco-cluster"></use></svg>
+    <svg class="deco-flower deco-flower--float-right"><use href="#deco-cluster"></use></svg>
     <div class="container-narrow reveal">
+      <svg class="deco-flower-inline" style="color: var(--rose-deep);"><use href="#deco-bloom"></use></svg>
       <span class="eyebrow">Bienvenidos</span>
-      <div class="ornament-divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+      <div class="ornament-divider"><span class="line"></span><svg class="deco-flower"><use href="#deco-bloom"></use></svg><span class="line"></span></div>
       <p class="welcome-text">
         Con el corazón lleno de alegría, nos preparamos para celebrar un día que hemos soñado por años.
         Es un honor invitarte a ser parte de este capítulo tan especial, donde <strong>Frida Sophía</strong>
@@ -94,9 +177,10 @@
 
   <!-- 4. INVITACIÓN PERSONALIZADA / PASE -->
   <section class="section-pass">
+    <svg class="deco-flower deco-flower--float-left"><use href="#deco-cluster"></use></svg>
     <div class="pass-ticket reveal">
-      <span class="pass-corner tl"></span>
-      <span class="pass-corner br"></span>
+      <svg class="pass-corner tl"><use href="#deco-bloom"></use></svg>
+      <svg class="pass-corner br"><use href="#deco-bloom"></use></svg>
       <p class="pass-lead">Invitación de Honor</p>
       <h3 class="pass-guest-name" id="guestName">Apreciable Invitado</h3>
       <div class="pass-divider-mini"></div>
@@ -107,10 +191,13 @@
 
   <!-- 5. NUESTRA HISTORIA / GALERÍA EDITORIAL -->
   <section class="section-story">
+    <svg class="deco-flower deco-flower--top-right-margin"><use href="#deco-cluster"></use></svg>
+    <svg class="deco-flower deco-flower--bottom-left-margin"><use href="#deco-bloom"></use></svg>
     <div class="container-wide">
       <div class="story-header reveal">
-        <span class="eyebrow">Recuerdos Inolvidables</span>
-        <h2 class="title-display">Cada Etapa, Un Tesoro</h2>
+        <svg class="deco-flower--corner-tl"><use href="#deco-cluster"></use></svg>
+        <span class="eyebrow">Recuerda</span>
+        <h2 class="title-display">Memento mori, Memento vivere</h2>
       </div>
 
       <div class="story-collage reveal">
@@ -132,7 +219,9 @@
 
   <!-- 6. DETALLES DE LA CELEBRACIÓN — Save the Date -->
   <section class="section-savedate">
+    <svg class="deco-flower deco-flower--float-left"><use href="#deco-cluster"></use></svg>
     <div class="container-narrow reveal">
+      <svg class="deco-flower--corner-tr"><use href="#deco-bloom"></use></svg>
       <span class="eyebrow">Save the Date</span>
       <div class="savedate-numeral">19</div>
       <div class="savedate-month">Septiembre</div>
@@ -158,56 +247,49 @@
     </div>
   </section>
 
-  <!-- 7. ITINERARIO -->
+<!-- 7. ITINERARIO -->
   <section class="section-itinerary">
     <div class="container-narrow">
       <div class="story-header reveal">
+        <svg class="deco-flower--corner-tl"><use href="#deco-cluster"></use></svg>
         <span class="eyebrow">El Programa</span>
         <h2 class="title-display">Itinerario del Día</h2>
       </div>
 
       <div class="timeline reveal">
+        <!-- 16:00 hrs -->
         <div class="timeline-item">
           <div class="timeline-icon">
             <i data-lucide="glass-water"></i>
           </div>
           <div class="timeline-content">
-            <span class="timeline-time">7:30 PM</span>
-            <h4 class="timeline-title">Recepción de Invitados</h4>
-            <p class="timeline-text">Bienvenida en Salón La Pica y cóctel de bienvenida.</p>
+            <span class="timeline-time">16:00 hrs</span>
+            <h4 class="timeline-title">Recepción</h4>
+            <p class="timeline-text">Cóctel de bienvenida para todos los invitados.</p>
           </div>
         </div>
 
+        <!-- 17:00 hrs -->
         <div class="timeline-item">
           <div class="timeline-icon">
             <i data-lucide="utensils"></i>
           </div>
           <div class="timeline-content">
-            <span class="timeline-time">8:30 PM</span>
-            <h4 class="timeline-title">Cena & Brindis</h4>
-            <p class="timeline-text">Banquete formal y palabras dedicadas a la quinceañera.</p>
+            <span class="timeline-time">17:00 hrs</span>
+            <h4 class="timeline-title">Comida</h4>
+            <p class="timeline-text">Momento de compartir el banquete y convivir.</p>
           </div>
         </div>
 
+        <!-- 18:00 hrs -->
         <div class="timeline-item">
           <div class="timeline-icon">
             <i data-lucide="music"></i>
           </div>
           <div class="timeline-content">
-            <span class="timeline-time">9:30 PM</span>
-            <h4 class="timeline-title">El Vals Principal</h4>
-            <p class="timeline-text">Momento especial junto a sus padres y familiares.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-icon">
-            <i data-lucide="party-popper"></i>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-time">10:00 PM - 02:00 AM</span>
-            <h4 class="timeline-title">Apertura de Pista</h4>
-            <p class="timeline-text">¡Música en vivo, DJ y mucha fiesta para celebrar!</p>
+            <span class="timeline-time">18:00 hrs</span>
+            <h4 class="timeline-title">Baile</h4>
+            <p class="timeline-text">Apertura de pista y celebración en grande.</p>
           </div>
         </div>
       </div>
@@ -244,6 +326,7 @@
 
   <!-- 9. CÓDIGO DE VESTIMENTA -->
   <section class="section-dresscode">
+    <svg class="deco-flower deco-flower--float-right"><use href="#deco-cluster"></use></svg>
     <div class="container-narrow reveal">
       <i data-lucide="shirt" class="dresscode-icon"></i>
       <span class="eyebrow">Código de Vestimenta</span>
@@ -301,6 +384,8 @@
     <div class="container-narrow rsvp-relative">
 
       <div class="rsvp-header reveal">
+        <svg class="deco-flower--corner-tl" style="color: rgba(255,248,242,0.55);"><use href="#deco-bloom"></use></svg>
+        <svg class="deco-flower--corner-tr" style="color: rgba(255,248,242,0.4);"><use href="#deco-bloom"></use></svg>
         <span class="rsvp-tag">RSVP</span>
         <h2 class="rsvp-title">¿Me acompañas<br><span class="rsvp-title-script">a celebrar?</span></h2>
         <div class="rsvp-divider"></div>
@@ -351,6 +436,7 @@
   <!-- 12. CIERRE -->
   <section class="section-closing">
     <div class="closing-content reveal">
+      <svg class="deco-flower-inline" style="color: var(--rose-deep); width: 34px; height: 34px;"><use href="#deco-bloom"></use></svg>
       <span class="closing-script">Gracias</span>
       <h2 class="closing-name">Frida Sophía</h2>
       <p class="closing-text">
