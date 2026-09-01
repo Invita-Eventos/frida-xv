@@ -84,15 +84,23 @@
     </defs>
   </svg>
 
-  <!-- Pantalla de Entrada para Autoplay de Música -->
+  <!-- Pantalla de Entrada con Buscador de Invitados del Excel -->
   <div id="welcomeOverlay" class="welcome-splash">
     <div class="splash-card">
-      <span class="splash-tag">Nuestra Celebración</span>
+      <span class="splash-tag">Mi Gran Celebración</span>
       <h2 class="splash-title">Frida Sophía</h2>
       <p class="splash-subtitle">Mis XV Años</p>
-      <button type="button" class="btn-open-invite" onclick="entrarInvitacion()">
-        <i data-lucide="music" style="width: 18px; height: 18px;"></i>
-        <span>ABRIR INVITACIÓN</span>
+
+      <div class="guest-picker-container">
+        <label for="guestSelect" class="picker-label">Busca tu nombre en la lista:</label>
+        <select id="guestSelect" class="guest-dropdown">
+          <option value="" disabled selected>Selecciona tu nombre o familia...</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn-open-invite" onclick="entrarConInvitado()">
+        <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+        <span>ABRIR MI INVITACIÓN</span>
       </button>
     </div>
   </div>
@@ -111,7 +119,7 @@
   <section class="section-hero">
     <div class="hero-frame"></div>
     <div class="hero-content">
-      <span class="sub-greeting">Nuestra Celebración</span>
+      <span class="sub-greeting">Mi Gran Celebración</span>
       <h1 class="hero-name">Frida Sophía</h1>
       <p class="hero-tagline">Mis XV Años</p>
       <p class="hero-frase">"Volver a florecer nunca ha sido un problema"</p>
@@ -300,7 +308,7 @@
   <section class="section-events">
     <div class="container-narrow">
       <div class="story-header reveal">
-        <span class="eyebrow">¿Dónde Llegar?</span>
+        <span class="eyebrow">¿Cómo Llegar?</span>
         <h2 class="title-display">Ubicación</h2>
       </div>
 
@@ -331,8 +339,19 @@
       <i data-lucide="shirt" class="dresscode-icon"></i>
       <span class="eyebrow">Código de Vestimenta</span>
       <div class="ornament-divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-      <!-- PERSONALIZA: reemplaza el texto de abajo con el código de vestimenta específico, por ejemplo "Formal / Etiqueta" -->
-      <div class="dresscode-value">[CÓDIGO DE VESTIMENTA]</div>
+      
+      <h4 class="dresscode-script">Formal</h4>
+      <p class="dresscode-note">Paleta de colores sugerida</p>
+
+      <!-- Muestrarios circulares de la paleta -->
+      <div class="palette-swatches">
+        <span class="color-circle" style="background-color: #3C423B;" title="Verde Olivo Profundo"></span>
+        <span class="color-circle" style="background-color: #9C6050;" title="Café Terracota"></span>
+        <span class="color-circle" style="background-color: #B66B5E;" title="Rosa Palo / Ladrillo"></span>
+        <span class="color-circle" style="background-color: #D98864;" title="Terracota Claro"></span>
+        <span class="color-circle" style="background-color: #993B2B;" title="Rojo Óxido"></span>
+        <span class="color-circle" style="background-color: #E5A144;" title="Mostaza Cálido"></span>
+      </div>
     </div>
   </section>
 
@@ -391,41 +410,49 @@
         <div class="rsvp-divider"></div>
         <p class="rsvp-subtitle">
           Tu asistencia es muy importante para nosotros.<br>
-          Al abrir WhatsApp, toca <strong>Enviar</strong> para completar tu confirmación.
+          Selecciona el número de personas que asistirán y presiona <strong>Confirmar Asistencia</strong>.
         </p>
       </div>
 
-      <!-- Formulario -->
-      <form id="rsvpForm" class="rsvp-form-card reveal" onsubmit="event.preventDefault(); enviarWhatsApp();">
+      <!-- Formulario RSVP con Asistentes y Bloqueo de Duplicados -->
+      <form id="rsvpForm" class="rsvp-form-card reveal" onsubmit="event.preventDefault(); enviarConfirmacion();">
 
         <div class="form-group">
-          <label for="guestInput" class="form-label">NOMBRE COMPLETO</label>
+          <label for="guestInput" class="form-label">INVITADO / FAMILIA</label>
           <input
             type="text"
             id="guestInput"
             class="form-input"
-            placeholder="Escribe tu nombre"
+            placeholder="Selecciona tu nombre al inicio"
+            readonly
             required
-            autocomplete="off"
           >
         </div>
 
         <div class="form-group">
-          <label for="messageInput" class="form-label">MENSAJE (OPCIONAL)</label>
+          <label for="passesSelect" class="form-label">PERSONAS QUE ASISTIRÁN</label>
+          <select id="passesSelect" class="form-input form-select">
+            <!-- Se llena automáticamente con los pases de tu Excel -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="messageInput" class="form-label">MENSAJE PARA LA QUINCEAÑERA (OPCIONAL)</label>
           <input
             type="text"
             id="messageInput"
             class="form-input"
-            placeholder="Escribe un mensaje para mí"
+            placeholder="Escribe una dedicatoria..."
             maxlength="100"
             autocomplete="off"
           >
           <div class="char-counter"><span id="charCount">0</span> / 100 caracteres</div>
         </div>
 
-        <button type="button" id="btnSubmitRsvp" class="btn-rsvp-submit" onclick="enviarWhatsApp()">
+        <!-- Botón que cambia si ya confirmó -->
+        <button type="button" id="btnSubmitRsvp" class="btn-rsvp-submit" onclick="enviarConfirmacion()">
           <i data-lucide="heart" class="icon-heart"></i>
-          <span>CONFIRMAR POR WHATSAPP</span>
+          <span>CONFIRMAR ASISTENCIA</span>
         </button>
 
       </form>
