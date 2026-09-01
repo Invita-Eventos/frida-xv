@@ -42,7 +42,7 @@ const INVITADOS_EXCEL = [
 let invitadoActual = null;
 const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyF92WUFRilqVC4xhR9jyQMDasXT00GyY0KB1IR4RiiNThV9Z4EEoClFKOaRECqug9y/exec";
 
-// 2. Inicializar selector mostrando SOLO el nombre
+// 2. Inicializar selector mostrando únicamente el nombre
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     lucide.createIcons();
@@ -53,12 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     INVITADOS_EXCEL.forEach((inv) => {
       const opt = document.createElement('option');
       opt.value = inv.id;
-      opt.textContent = inv.nombre; // Solo el nombre sin paréntesis ni conteo de pases
+      opt.textContent = inv.nombre;
       selectEl.appendChild(opt);
     });
   }
 
-  // Soporte para URL directa (?id=15)
+  // Carga directa si se comparte link con parámetro (?id=15)
   const urlParams = new URLSearchParams(window.location.search);
   const guestId = parseInt(urlParams.get('id'), 10);
   if (guestId) {
@@ -103,12 +103,12 @@ function cargarDatosInvitado(inv) {
   const guestInput = document.getElementById('guestInput');
   const passesSelect = document.getElementById('passesSelect');
 
-  // Asigna nombre y los pases calculados en el Pase de Honor
+  // Actualizar Pase de Honor
   if (guestNameEl) guestNameEl.textContent = inv.nombre;
   if (passBadgeEl) passBadgeEl.textContent = `${inv.pases} ${inv.pases === 1 ? 'Pase Asignado' : 'Pases Asignados'}`;
   if (guestInput) guestInput.value = inv.nombre;
 
-  // Llenar opciones del formulario RSVP
+  // Llenar selector de asistencia
   if (passesSelect) {
     passesSelect.innerHTML = '';
     for (let p = inv.pases; p >= 1; p--) {
@@ -123,7 +123,7 @@ function cargarDatosInvitado(inv) {
     passesSelect.appendChild(noOpt);
   }
 
-  // Bloqueo si ya confirmó previamente en este dispositivo
+  // Bloqueo si ya confirmó previamente en este navegador
   const yaRegistrado = localStorage.getItem(`rsvp_confirmado_${inv.id}`);
   const btnSubmit = document.getElementById('btnSubmitRsvp');
   if (yaRegistrado && btnSubmit) {
