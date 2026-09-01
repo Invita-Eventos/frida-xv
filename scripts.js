@@ -35,11 +35,12 @@ const INVITADOS_EXCEL = [
   { id: 33, nombre: "Dafne", pases: 1 },
   { id: 34, nombre: "Luis Ángel Martínez", pases: 2 },
   { id: 35, nombre: "Jorge Gómez", pases: 1 },
-  { id: 36, nombre: "Johan Gómez", pases: 1 }
+  { id: 36, nombre: "Johan Gómez", pases: 1 },
+  { id: 37, nombre: "Prueba", pases: 5 }
 ];
 
 let invitadoActual = null;
-const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwCoC1KNr-yIEMo_QgWVAmHGIsFd1GHdde-VRK6fokdV92YOIlIUKjRszgxDXBFp00BWA/exec";
+const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyF92WUFRilqVC4xhR9jyQMDasXT00GyY0KB1IR4RiiNThV9Z4EEoClFKOaRECqug9y/exec";
 
 // 2. Inicializar selector mostrando SOLO el nombre
 document.addEventListener('DOMContentLoaded', () => {
