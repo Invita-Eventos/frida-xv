@@ -36,7 +36,6 @@ const INVITADOS_EXCEL = [
   { id: 34, nombre: "Luis Ángel Martínez", pases: 2 },
   { id: 35, nombre: "Jorge Gómez", pases: 1 },
   { id: 36, nombre: "Johan Gómez", pases: 1 },
-  { id: 37, nombre: "Prueba", pases: 5 }
 ];
 
 let invitadoActual = null;
